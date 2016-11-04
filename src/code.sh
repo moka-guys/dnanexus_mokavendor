@@ -48,16 +48,11 @@ $java -jar /CalculateHsMetrics.jar BI=$targets.picard TI=$targets.picard I="$nam
 name=`dx describe "${sorted_bam}" --name`
 name="${name%.bam}"
 
-dx ls
-ls
-
+# made folders for output
 mkdir -p ~/out/hsmetrics_tsv/QC/ ~/out/pertarget_coverage_tsv/QC/
+#move results to folders for dx upload all outputs
 mv hsmetrics.tsv ~/out/hsmetrics_tsv/QC/"$name.hsmetrics.tsv"
 mv pertarget_coverage.tsv ~/out/pertarget_coverage_tsv/QC/"$name.pertarget_coverage.tsv"
 
 dx-upload-all-outputs --parallel
 
-# file_id=`dx upload hsmetrics.tsv -o "$name.hsmetrics.tsv" --brief`
-# dx-jobutil-add-output "hsmetrics_tsv" "$file_id"
-# file_id=`dx upload pertarget_coverage.tsv -o "$name.pertarget_coverage.tsv" --brief`
-# dx-jobutil-add-output "pertarget_coverage_tsv" "$file_id"
