@@ -33,8 +33,13 @@ targets=${vendor_exome_bedfile_prefix}_${genome}_targets
 #dx download "$appdata:/vendor_exomes/$targets.bed" 
 
 samtools view -H "$name.bam" | grep '^@SQ' > $targets.picard
+head  $vendor_exome_bedfile_prefix.bed | grep -v '^#' | sed 's/chr//' | awk -F '\t' '{print $1,$2,$3}' >  tidied.bed
 
-awk '{print $1 "\t" $2+1 "\t" $3 "\t+\t" $1 ":" $2+1 "-" $3}' < $vendor_exome_bedfile_prefix.bed >> $targets.picard
+awk '{print $1 "\t" $2+1 "\t" $3 "\t+\t" $1 ":" $2+1 "-" $3}' < tidied.bed >> $targets.picard
+
+head tidied.bed
+head $vendor_exome_bedfile_prefix.bed
+head $targets.picard -n 100
 
 #
 # Run Picard CalculateHsMetrics
