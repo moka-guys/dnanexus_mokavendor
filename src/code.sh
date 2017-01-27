@@ -15,6 +15,7 @@ name=`dx describe "${sorted_bam}" --name`
 name="${name%.bam}"
 #dx download "$sorted_bam" -o input.bam
 dx download "$sorted_bam" -o "$name.bam"
+dx download "$vendor_exome_bedfile"
 
 #
 # Fetch / reconstruct genome, and optionally index it
@@ -27,11 +28,13 @@ fi
 #
 # Fetch and prepare regions
 #
-appdata=project-B6JG85Z2J35vb6Z7pQ9Q02j8
-targets=${vendor_exome}_${genome}_targets
-dx download "$appdata:/vendor_exomes/$targets.bed" 
+#appdata=project-B6JG85Z2J35vb6Z7pQ9Q02j8
+targets=${vendor_exome_bedfile_prefix}_${genome}_targets
+#dx download "$appdata:/vendor_exomes/$targets.bed" 
+
 samtools view -H "$name.bam" | grep '^@SQ' > $targets.picard
-awk '{print $1 "\t" $2+1 "\t" $3 "\t+\t" $1 ":" $2+1 "-" $3}' < $targets.bed >> $targets.picard
+
+awk '{print $1 "\t" $2+1 "\t" $3 "\t+\t" $1 ":" $2+1 "-" $3}' < $vendor_exome_bedfile_prefix.bed >> $targets.picard
 
 #
 # Run Picard CalculateHsMetrics
@@ -49,10 +52,13 @@ name=`dx describe "${sorted_bam}" --name`
 name="${name%.bam}"
 
 # made folders for output
-mkdir -p ~/out/hsmetrics_tsv/QC/ ~/out/pertarget_coverage_tsv/QC/
+mkdir -p ~/out/hsmetrics_tsv/QC/ ~/out/pertarget_coverage_tsv/QC/ ~/out/bedfile/
+
+
 #move results to folders for dx upload all outputs
 mv hsmetrics.tsv ~/out/hsmetrics_tsv/QC/"$name.hsmetrics.tsv"
 mv pertarget_coverage.tsv ~/out/pertarget_coverage_tsv/QC/"$name.pertarget_coverage.tsv"
+#mv $vendor_exome_bedfile_prefix.bed ~/out/bedfile/$vendor_exome_bedfile_prefix.bed 
 
 dx-upload-all-outputs --parallel
 
