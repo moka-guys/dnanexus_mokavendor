@@ -20,7 +20,6 @@
       "label": "Vendor exome bedfile",
       "help": "Choose the vendor exome (enrichment kit) whose coordinates will be used to calculate the selection metrics. See the app help for more information.",
       "class": "file",
-      "group": "Common",
       "patterns": ["*.bed"]
     },
     {
