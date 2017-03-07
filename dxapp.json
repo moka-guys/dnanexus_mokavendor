@@ -16,39 +16,11 @@
       "patterns": ["*.bam"]
     },
     {
-      "name": "vendor_exome",
-      "label": "Vendor exome",
+      "name": "vendor_exome_bedfile",
+      "label": "Vendor exome bedfile",
       "help": "Choose the vendor exome (enrichment kit) whose coordinates will be used to calculate the selection metrics. See the app help for more information.",
-      "class": "string",
-      "choices": [
-        "agilent_sureselect_human_all_exon_50mb",
-        "agilent_sureselect_human_all_exon_v1",
-        "agilent_sureselect_human_all_exon_v2",
-        "agilent_sureselect_human_all_exon_v4",
-        "agilent_sureselect_human_all_exon_v4_plus_utrs",
-        "agilent_sureselect_human_all_exon_v5",
-        "agilent_sureselect_human_all_exon_v5_plus_utrs",
-        "agilent_sureselect_human_kinome_v1",
-        "haloplex_arrhythmia_ilm",
-        "haloplex_cancer_research_panel_ilm",
-        "haloplex_cardiomyopathy_ilm",
-        "haloplex_chromosome_x_ilm",
-        "haloplex_connective_tissue_disorder_ilm",
-        "haloplex_exome",
-        "haloplex_iccg_ilm",
-        "haloplex_noonan_syndrome_ilm",
-        "illumina_nextera_exome",
-        "illumina_nextera_rapid_capture_exome",
-        "illumina_nextera_rapid_capture_expanded_exome",
-        "illumina_truseq_exome",
-        "nimblegen_seqcap_ez_50mb_human_utr_design",
-        "nimblegen_seqcap_ez_comprehensive_cancer_design",
-        "nimblegen_seqcap_ez_exome_utr",
-        "nimblegen_seqcap_ez_exome_v2",
-        "nimblegen_seqcap_ez_exome_v3",
-        "nimblegen_seqcap_ez_neurology_panel_design"
-      ],
-      "group": "Common"
+      "class": "file",
+      "patterns": ["*.bed"]
     },
     {
       "name": "validation_stringency",
@@ -96,7 +68,7 @@
     ],
     "systemRequirements": {
       "main": {
-        "instanceType": "mem2_hdd2_x2"
+        "instanceType": "mem1_ssd1_x4"
       }
     },
     "file": "src/code.sh",
