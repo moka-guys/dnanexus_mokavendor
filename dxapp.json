@@ -1,7 +1,7 @@
 {
   "name": "moka_vendor_human_exome_selection_metrics",
-  "title": "v1.1.1 - moka Vendor Human Exome Selection Metrics",
-  "summary": "Calculates mappings metrics for common vendor human exome kits, with Picard CalculateHsMetrics",
+  "title": "moka Vendor Human Exome Selection Metrics",
+  "summary": "v1.1.1 - Calculates mappings metrics for common vendor human exome kits, with Picard CalculateHsMetrics",
   "tags": [
     "Statistics",
     "Mappings QC"
