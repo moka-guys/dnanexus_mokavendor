@@ -1,4 +1,4 @@
-# Vendor Human Exome Selection Metrics
+# Vendor Human Exome Selection Metrics v1.1.1
 
 ## What does this app do?
 
